@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Crime Pie Chart</title>
+</head>
+<style>
+  .center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+	}
+  </style>
+<body>
+	 <h1 class="center">
+		Crimes Pie Chart
+	</h1>
+
+	<p class="center">Years: 2000, 2004, 2008, 2012, 2016</p>
+
+	<hr size="1" />
+
+	<div id="pie"></div>
+
+	<script src="libs/jquery-3.3.1.min.js"></script>
+	<script src="libs/d3.min.js"></script>
+	<script src="libs/d3pie.min.js"></script>
+	<script src='libs/topojson.v1.min.js'></script>
+  	<script src='https://cdn.rawgit.com/Caged/d3-tip/v0.8.0-alpha.1/index.js'></script>
+	
+	<script>
+	var data = [
+		  { label: "-", value: 1 },
+		];
+	var data_to_push = {}
+		d3.queue()
+	    .defer(d3.csv, 'excelsheets/crime2016_barchart.csv')
+	    .defer(d3.csv, 'excelsheets/crime2012_barchart.csv')
+	    .defer(d3.csv, 'excelsheets/crime2008_barchart.csv')
+	    .defer(d3.csv, 'excelsheets/crime2004_barchart.csv')
+	    .await(function(error, d2016, d2012, d2008, d2004) {
+	    	data_to_push['2016'] = d2016;
+	    	data_to_push['2012'] = d2012;
+	    	data_to_push['2008'] = d2008;
+	    	data_to_push['2004'] = d2004;
+	        
+	    });
+		var pie = new d3pie("pie", {
+			data : {
+				content : data
+			}
+		});
+
+		$(function() {
+			$("#addData1").on("click", function() {
+				data_2016 = data_to_push['2016']
+				data=[]
+				for (i = 0; i < data_2016.length; i++) {
+						data.push({
+						      label: data_2016[i].Crime,
+						      value: Number(data_2016[i].value_percentage)
+						    });    
+						} 
+						
+				pie.updateProp("data.content", data);
+				
+			});
+		});
+		$(function() {
+			$("#addData2").on("click", function() {
+				data_2012 = data_to_push['2012']
+				data=[]
+				for (i = 0; i < data_2012.length; i++) {
+						data.push({
+						      label: data_2012[i].Crime,
+						      value: Number(data_2012[i].value_percentage)
+						    });    
+						} 
+				pie.updateProp("data.content", data);
+			});
+		});
+
+		$(function() {
+			$("#addData3").on("click", function() {
+				data_2008 = data_to_push['2008']
+				data=[]
+				for (i = 0; i < data_2008.length; i++) {
+						data.push({
+						      label: data_2008[i].Crime,
+						      value: Number(data_2008[i].value_percentage)
+						    });    
+						} 
+				pie.updateProp("data.content", data);
+			});
+		});
+		$(function() {
+			$("#addData4").on("click", function() {
+				data_2004 = data_to_push['2004']
+				data=[]
+				for (i = 0; i < data_2004.length; i++) {
+						data.push({
+						      label: data_2004[i].Crime,
+						      value: Number(data_2004[i].value_percentage1)
+						    });    
+						
+						}	
+				pie.updateProp("data.content", data);
+				
+			});
+		});
+		$(function() {
+			$("#addData5").on("click", function() {
+				data=[]
+				data_2000 = data_to_push['2004']
+				for (i = 0; i < data_2000.length; i++) {
+						data.push({
+						      label: data_2000[i].Crime,
+						      value: Number(data_2000[i].value_percentage2)
+						    });    
+						
+				}
+				pie.updateProp("data.content", data);
+			});
+		});
+	</script>
+
+	<input type="button" value="2016" id="addData1" />
+	<input type="button" value="2012" id="addData2" />
+	<input type="button" value="2008" id="addData3" />
+	<input type="button" value="2004" id="addData4" />
+	<input type="button" value="2000" id="addData5" />
+
+
+
+	<hr size="1" />
+
+	
+
+</body>
+</html>
