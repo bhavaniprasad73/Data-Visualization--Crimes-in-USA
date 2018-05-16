@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+svg {
+  font: 12px sans-serif;
+  padding: 10px;
+}
+
+.axis,
+.frame {
+  shape-rendering: crispEdges;
+}
+
+.axis line {
+  stroke: #ddd;
+}
+
+.axis path {
+  display: none;
+}
+
+.cell text {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.frame {
+  fill: none;
+  stroke: #aaa;
+}
+
+circle {
+  fill-opacity: .6;
+}
+
+</style>
+
+
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script>
+
+
+// Defining the variables for the scatter plot scale size
+var w = 960,
+    s = 240,
+    pad = 10;
+	
+// Defining the x- axis scale range (boundary)
+var h = d3.scale.linear()
+    .range([pad / 2, s - pad / 2]);
+
+var v = d3.scale.linear()
+    .range([s - pad / 2, pad / 2]);
+
+var hor = d3.svg.axis()
+    .scale(h)
+    .orient("bottom")
+    .ticks(6)
+    .tickFormat(formatter);
+
+var ver = d3.svg.axis()
+    .scale(v)
+    .orient("left")
+    .ticks(6)
+    .tickFormat(formatter);
+	
+	
+
+var color = d3.scale.category10();
+
+d3.csv("Crime1.csv", function(error, data) {
+  if (error) throw error;
+
+  //console.log(data);
+  var columnData = {},
+      features = d3.keys(data[0]).filter(function(d) { return d !== "State"; }),
+      p = features.length;
+	  
+	  // console.log(features);
+	  //console.log(n);
+	  
+
+  features.forEach(function(hold) {
+    columnData[hold] = d3.extent(data, function(d) { return +d[hold]; });
+
+    //console.log(columnData);
+  });
+	
+  // console.log(columnData);
+  hor.tickSize(s * p);
+  ver.tickSize(-s * p);
+  
+  
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", s * p + pad)
+      .attr("height", s * p + pad)
+    .append("g")
+      .attr("transform", "translate(" + pad + "," + pad / 2 + ")");
+
+  svg.selectAll(".x.axis")
+      .data(features)
+    .enter().append("g")
+      .attr("class", "x axis")
+      .attr("transform", function(d, e) { return "translate(" + (p - e - 1) * s + ",0)"; })
+      .each(function(d) { h.domain(columnData[d]); d3.select(this).call(hor); });
+
+  svg.selectAll(".y.axis")
+      .data(features)
+    .enter().append("g")
+      .attr("class", "y axis")
+      .attr("transform", function(d, e) { return "translate(0," + e * s + ")"; })
+      .each(function(d) { v.domain(columnData[d]); d3.select(this).call(ver); });
+
+  var cell = svg.selectAll(".cell")
+      .data(dispatch(features, features))
+    .enter().append("g")
+      .attr("class", "cell")
+      .attr("transform", function(d) { return "translate(" + (p - d.e - 1) * s + "," + d.f * s + ")"; })
+      .each(draw);
+
+  // Titles for the diagonal.
+  cell.filter(function(d) { return d.e === d.f; }).append("text")
+      .attr("x", pad)
+      .attr("y", pad)
+      .attr("dy", ".71em")
+      .text(function(d) { return d.h; });
+	  
+	  
+
+  function draw(p) {
+	
+	//console.log(p)
+    var cell = d3.select(this);
+
+    //console.log(columnData[p.h]);
+
+    h.domain(columnData[p.h]);
+    v.domain(columnData[p.v]);
+
+    cell.append("rect")
+        .attr("class", "frame")
+        .attr("x", pad / 2)
+        .attr("y", pad / 2)
+        .attr("width", s - pad)
+        .attr("height", s - pad);
+
+    //console.log(data);
+	
+    cell.selectAll("circle")
+        .data(data)
+      .enter().append("circle")
+        .attr("cx", function(d) { return h(d[p.h]); })
+        .attr("cy", function(d) { return v(d[p.v]); })
+        .attr("r", 2)
+        .style("fill", function(d) { return color(d.State); });
+  }
+});
+
+function dispatch(a, b) {
+  var c = [], p = a.length, m = b.length, e, f;
+  for (e = -1; ++e < p;) for (f = -1; ++f < m;) c.push({h: a[e], e: e, v: b[f], f: f});
+
+  //console.log(c);
+  return c;
+}
+
+function formatter(n){
+
+  if(n>999999999){
+    return parseFloat(n/1000000000) + 'B';
+  }
+  if(n>999999){
+    return parseFloat(n/1000000) + 'M';
+  }
+
+  if(n>999){
+    return parseFloat(n/1000) + 'K';
+  }
+  else{
+    return n;
+  }
+}
+
+</script>
