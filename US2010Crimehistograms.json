@@ -1,0 +1,207 @@
+{"states":[
+  {
+    "name": "AL",
+    "hits": 374382
+  },
+  {
+    "name": "AK",
+    "hits": 49592
+  },
+  {
+    "name": "AZ",
+    "hits": 506660
+  },
+  {
+    "name": "AR",
+    "hits": 237062
+  },
+  {
+    "name": "CA",
+    "hits": 2292144
+  },
+  {
+    "name": "CO",
+    "hits": 302680
+  },
+  {
+    "name": "CT",
+    "hits": 176684
+  },
+  {
+    "name": "DE",
+    "hits": 73372
+  },
+  {
+    "name": "DC",
+    "hits": 73656
+  },
+  {
+    "name": "FL",
+    "hits": 1542008
+  },
+  {
+    "name": "GA",
+    "hits": 785034
+  },
+  {
+    "name": "HI",
+    "hits": 98540
+  },
+  {
+    "name": "ID",
+    "hits": 69800
+  },
+  {
+    "name": "IL",
+    "hits": 812392
+  },
+  {
+    "name": "IN",
+    "hits": 440514
+  },
+  {
+    "name": "IA",
+    "hits": 153862
+  },
+  {
+    "name": "KS",
+    "hits": 199422
+  },
+  {
+    "name": "KY",
+    "hits": 243548
+  },
+  {
+    "name": "LA",
+    "hits": 381816
+  },
+  {
+    "name": "ME",
+    "hits": 69042
+  },
+  {
+    "name": "MD",
+    "hits": 409832
+  },
+  {
+    "name": "MA",
+    "hits": 370466
+  },
+  {
+    "name": "MI",
+    "hits": 640388
+  },
+  {
+    "name": "MN",
+    "hits": 297892
+  },
+  {
+    "name": "MS",
+    "hits": 193190
+  },
+  {
+    "name": "MO",
+    "hits": 456596
+  },
+  {
+    "name": "MT",
+    "hits": 56284
+  },
+  {
+    "name": "NE",
+    "hits": 107840
+  },
+  {
+    "name": "NV",
+    "hits": 185866
+  },
+  {
+    "name": "NH",
+    "hits": 62868
+  },
+  {
+    "name": "NJ",
+    "hits": 420194
+  },
+  {
+    "name": "NM",
+    "hits": 165846
+  },
+  {
+    "name": "NY",
+    "hits": 912404
+  },
+  {
+    "name": "NC",
+    "hits": 727762
+  },
+  {
+    "name": "ND",
+    "hits": 27116
+  },
+  {
+    "name": "OH",
+    "hits": 826284
+  },
+  {
+    "name": "OK",
+    "hits": 295128
+  },
+  {
+    "name": "OR",
+    "hits": 252610
+  },
+  {
+    "name": "PA",
+    "hits": 645956
+  },
+  {
+    "name": "RI",
+    "hits": 59336
+  },
+  {
+    "name": "SC",
+    "hits": 418042
+  },
+  {
+    "name": "SD",
+    "hits": 34768
+  },
+  {
+    "name": "TN",
+    "hits": 543528
+  },
+  {
+    "name": "TX",
+    "hits": 2128954
+  },
+  {
+    "name": "UT",
+    "hits": 188482
+  },
+  {
+    "name": "VT",
+    "hits": 29960
+  },
+  {
+    "name": "VA",
+    "hits": 409174
+  },
+  {
+    "name": "WA",
+    "hits": 541128
+  },
+  {
+    "name": "WV",
+    "hits": 93774
+  },
+  {
+    "name": "WI",
+    "hits": 313896
+  },
+  {
+    "name": "WY",
+    "hits": 29972
+  }
+]
+}
